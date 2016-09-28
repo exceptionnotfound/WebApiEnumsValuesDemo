@@ -2,17 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
+using WebApiEnumsValuesDemo.Extensions;
 
 namespace WebApiEnumsValuesDemo.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : ApiController
     {
-        public ActionResult Index()
+        [HttpGet]
+        [Route("accesslevels/all")]
+        public IHttpActionResult GetAccessLevels()
         {
-            ViewBag.Title = "Home Page";
+            return Ok(EnumExtensions.GetValues<AccessLevel>());
+        }
 
-            return View();
+        [HttpGet]
+        [Route("addresstypes/all")]
+        public IHttpActionResult GetAddressTypes()
+        {
+            return Ok(EnumExtensions.GetValues<AddressType>());
         }
     }
 }
